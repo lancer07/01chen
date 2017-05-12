@@ -29,6 +29,7 @@ const PhotosPage = {
 
 const routes = {
   '/': Home,
+  '/01chen' : Home,
   '/photos' : PhotosPage
 }
 
