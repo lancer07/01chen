@@ -1,5 +1,10 @@
 <template>
     <div class="monent-wrap">
+        <mt-search 
+            v-model="searchKey"
+            cancel-text="cancel"
+            placeholder="search"
+            ></mt-search>
         <ul 
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10">
@@ -12,26 +17,51 @@
 </template>
 
 <script>
+    import { Indicator } from 'mint-ui';
     export default {
         props: [],
         methods : {
             showDetail(id,title){
                this.$emit('showDetail',id,title);
+            },
+            renderList(){
+                var that = this;
+                that.$http.jsonp(that.url,{
+                    params: {
+                        json : 1,
+                        cat : 9,
+                        s : that.searchKey
+                    }
+                }).then(function(response){
+                    that.list = response.body.posts;
+                    Indicator.close();
+                },function(response){
+                    console.log(response);
+                });
             }
         },
+        activated(){
+            Indicator.open();
+        },
         created(){
-            var that = this;
-            var url = that.url + 'cat=9';
-            this.$http.jsonp(url).then(function(response){  
-                that.list = response.body.posts;
-            },function(response){
-                console.log(response);
-            });
+            this.renderList();
         },
         data() {
             return {
-                url : 'http://www.sh1993.com/linqing07/?json=1&',
-                list : []
+                url : 'http://www.sh1993.com/linqing07/',
+                list : [],
+                searchKey : ' '
+            }
+        },
+        watch : {
+            searchKey : function(oldValue,newValue){
+                if(oldValue == ''){
+                    this.searchKey = ' '
+                }
+                if(newValue == ''){
+                    this.searchKey = ' '
+                }
+                this.renderList();
             }
         }
     }
@@ -43,6 +73,12 @@
         height: 300px;
         margin: auto;
     }
+    .mint-search{
+        height:auto;
+    }
+    .mint-search-list{
+        display:none!important;
+    }
     .monent-wrap{
         ul{
             margin:0;
@@ -51,9 +87,9 @@
             li{
                 margin:0;
                 padding:0px;
-                background:#fff;
+                background:#f4f4f4;
                 border:1px solid #f0f0f0;
-                margin:10px;
+                margin:10px 0;
                 p{
                     padding:10px;
                     margin:0;

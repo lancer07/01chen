@@ -11,6 +11,7 @@
 </template>
 
 <script>
+    import { Indicator } from 'mint-ui';
     function GetQueryString(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -19,13 +20,20 @@
     export default {
         props: [],
         methods : {
-            
+        },
+        beforeCreate(){
+            this.content = [];
+        },
+        activated(){
+            this.content = [];
+             Indicator.open();
         },
         created(){
             var that = this;
             var url = that.url + 'p=' + GetQueryString('id');
             that.$http.jsonp(url).then(function(response){
                 that.content = response.body.post.attachments;
+                Indicator.close();
             },function(response){
                 console.log(response);
             });
@@ -33,7 +41,7 @@
         data () {
             return {
                 url : 'http://www.sh1993.com/linqing07/?json=1&',
-                content : ''
+                content : []
             }
         }
     }
@@ -62,6 +70,7 @@
             li{
                 padding:0;
                 margin:10px;
+                background:#f4f4f4;
             }
         }
         img{
