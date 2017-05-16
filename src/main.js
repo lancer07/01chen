@@ -28,8 +28,8 @@ const PhotosPage = {
 }
 
 const routes = {
-  'home': Home,
-  'photos' : PhotosPage
+  '/home': Home,
+  '/photos' : PhotosPage
 }
 
 new Vue({

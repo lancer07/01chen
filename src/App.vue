@@ -6,7 +6,7 @@
             <mt-tab-container v-model="selected">
                 <div class="page-header-main">
                     <mt-tab-container-item id="Monent">
-                        <photoList v-on:showDetail="showDetail" />
+                        <photo-list v-on:showDetail="showDetail" />
                     </mt-tab-container-item>
                     <mt-tab-container-item id="About Me">
                         <about />
@@ -70,7 +70,7 @@
         methods: {
             showDetail(id,title){
                 this.popupDetail = true;
-                this.photosUrl = 'photos?id=' + id;
+                this.photosUrl = '/photos?id=' + id;
                 this.article.title = title;
             },
             closePopup(){
