@@ -8,9 +8,14 @@
         <ul 
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10">
-            <li v-for="item in list" @click="showDetail(item.id,item.title)">
+            <li v-for="(item,index) in list" @click="showDetail(item.id,item.title)">
                 <p>{{item.title}}</p>
-                <img v-lazy="item.attachments[0].url">
+                <div v-if="index == 0">
+                    <img v-bind:src="item.attachments[0].url">
+                </div>
+                <div v-else>
+                    <img v-lazy="item.attachments[0].url">
+                </div>
             </li>
         </ul>
     </div>
@@ -48,7 +53,7 @@
         },
         data() {
             return {
-                url : 'http://www.sh1993.com/linqing07/',
+                url : 'http://w848658.s234.ufhosted.com/linqing07/',
                 list : [],
                 searchKey : ' '
             }
@@ -68,11 +73,6 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-   image[lazy=loading] {
-        width: 40px;
-        height: 300px;
-        margin: auto;
-    }
     .mint-search{
         height:auto;
     }

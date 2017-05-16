@@ -1,6 +1,6 @@
 <template>
     <div id="app" >
-        <welcome v-bind:isShow="showWelcome" v-bind:time="time" />
+        <welcome v-bind:class="{hideWelcome:!showWelcome}" v-bind:time="time" />
         <div class="page-wrap">
             <div class="page-title">{{selected}}</div>
             <mt-tab-container v-model="selected">
@@ -92,7 +92,7 @@
         },
         data () {
             return {
-                url : 'http://www.sh1993.com/linqing07/?json=1&',
+                url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
                 photosUrl : '',
                 selected : 'About Me',
                 time : 3,

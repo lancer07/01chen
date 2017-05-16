@@ -1,8 +1,8 @@
 {
-  "name": "my-project",
+  "name": "LittleCorn",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "linqing-s <linqing-s@360.cn>",
+  "description": "The app is used to show the monents of little Corn",
+  "author": "Lancer Lin",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

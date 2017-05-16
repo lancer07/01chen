@@ -1,5 +1,5 @@
 <template>
-    <div id="welcome" v-bind:class="{hideWelcome : !isShow}">
+    <div class="welcome">
         <span>{{time}}</span>
     </div>
 </template>
@@ -23,7 +23,7 @@
 </script>
 
 <style lang="less" rel="stylesheet/less">
-    #welcome{
+    .welcome{
         background:url('../assets/portrait.png') 50% 50% no-repeat #ffcdce;
         height:100%;
         width:100%;
@@ -32,11 +32,16 @@
         position:fixed;
         z-index:1000;
         text-align:right;
+        transition: all 0.7s ease-out;
         span{
             margin:10px;
         }
     }
     .hideWelcome{
-        display:none
+        width:0;
+        height:0;  
+        opacity:0; 
+        left:50%;
+        top:30%;
     }
 </style>

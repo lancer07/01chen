@@ -40,7 +40,7 @@
         },
         data () {
             return {
-                url : 'http://www.sh1993.com/linqing07/?json=1&',
+                url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
                 content : []
             }
         }
