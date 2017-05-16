@@ -18,12 +18,12 @@ import Photos from './page/Photos'
 
 const NotFound = { template: '<p>Page not found</p>' }
 const Home = { 
-    template: '<App />',
+    template: '<app />',
     components: { App } 
 }
 
 const PhotosPage = { 
-    template: '<Photos />',
+    template: '<photos />',
     components: { Photos } 
 }
 
