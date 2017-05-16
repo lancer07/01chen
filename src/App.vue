@@ -70,7 +70,7 @@
         methods: {
             showDetail(id,title){
                 this.popupDetail = true;
-                this.photosUrl = '/photos?id=' + id;
+                this.photosUrl = 'photos?id=' + id;
                 this.article.title = title;
             },
             closePopup(){
