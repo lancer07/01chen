@@ -43,11 +43,27 @@
                     </a>
                     <div class="page-title">{{article.title}}</div>
                     <div class="iframeWrap">
-                        <photos :content="article.content" />
+                        <photos :content="article.content" v-on:showSinglePopup="showSinglePopup" v-on:closeSinglePopup="closeSinglePopup" />
                     </div>
                 </div>
             </mt-popup>
         </div>
+
+        <mt-popup
+            v-model="popupSingle"
+            position="bottom"
+            v-bind:modal="noModel">
+            <div class="single-page">
+                <div class="page-close">
+                    <a @touchstart="closeSinglePopup" >
+                        <img src="./assets/close.png" width="40" />
+                    </a>
+                </div>
+                <img v-bind:src="downloadSingle" width="100%"/>
+            </div>
+                
+        </mt-popup>
+
     </div>
 </template>
 
@@ -85,6 +101,14 @@
                 this.article.title = '';
                 this.article.content = [];
                 this.popupDetail = false;
+            },
+            showSinglePopup(url){
+                this.popupSingle = true;
+                this.downloadSingle = url;
+            },
+            closeSinglePopup(){
+                this.popupSingle = false;
+                this.downloadSingle = '';
             }
         },
         created(){
@@ -109,6 +133,18 @@
                 article : {
                     title : '',
                     content : []
+                },
+                popupSingle : false,
+                noModel : false,
+                downloadSingle : ''
+            }
+        },
+        watch : {
+            selected : function(newValue,oldValue){
+                if(newValue == 'Monent'){
+                    window.scrollTo(0,55);
+                }else{
+                    window.scrollTo(0,0);
                 }
             }
         }
