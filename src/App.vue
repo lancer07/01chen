@@ -38,7 +38,7 @@
             position="right"
             closeOnClickModal="false">
                 <div class="page-wrap">
-                    <a @click="closePopup" class="page-back">
+                    <a @touchstart="closePopup" class="page-back">
                         <img src="./assets/back.png" width="10" />
                     </a>
                     <div class="page-title">{{article.title}}</div>
@@ -149,6 +149,7 @@
                 line-height:50px;
                 text-align: center;
                 z-index:2000;
+                background:#fafafa;
                 img{
                     vertical-align:middle;
                 }
