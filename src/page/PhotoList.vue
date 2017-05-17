@@ -4,7 +4,8 @@
             v-model="searchKey"
             cancel-text="cancel"
             placeholder="search"
-            ></mt-search>
+        ></mt-search>
+           
         <ul 
             infinite-scroll-disabled="loading"
             infinite-scroll-distance="10">
@@ -35,7 +36,7 @@
                     params: {
                         json : 1,
                         cat : 9,
-                        s : that.searchKey
+                        s : that.searchKey == '' ? ' ' : that.searchKey
                     }
                 }).then(function(response){
                     that.list = response.body.posts;
@@ -55,17 +56,11 @@
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/',
                 list : [],
-                searchKey : ' '
+                searchKey : ''
             }
         },
         watch : {
             searchKey : function(oldValue,newValue){
-                if(oldValue == ''){
-                    this.searchKey = ' '
-                }
-                if(newValue == ''){
-                    this.searchKey = ' '
-                }
                 this.renderList();
             }
         }
