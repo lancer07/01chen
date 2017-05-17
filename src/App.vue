@@ -43,7 +43,7 @@
                     </a>
                     <div class="page-title">{{article.title}}</div>
                     <div class="iframeWrap">
-                        <iframe v-bind:src="photosUrl" width="100%" height="100%" frameborder="0"></iframe>
+                        <photos :content="article.content" />
                     </div>
                 </div>
             </mt-popup>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+    import { Indicator } from 'mint-ui';
     import About from './page/About';
     import Contact from './page/Contact';
     import Welcome from './page/Welcome';
@@ -69,9 +70,16 @@
         },
         methods: {
             showDetail(id,title){
+                var that = this;
                 this.popupDetail = true;
-                this.photosUrl = '/photos?id=' + id;
                 this.article.title = title;
+                var url = that.url + 'p=' + id;
+                that.$http.jsonp(url).then(function(response){
+                    that.article.content = response.body.post.attachments;
+                    Indicator.close();
+                },function(response){
+                    console.log(response);
+                });
             },
             closePopup(){
                 this.article.title = '';
@@ -93,7 +101,7 @@
         data () {
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
-                photosUrl : '',
+                //photosUrl : '',
                 selected : 'About Me',
                 time : 3,
                 showWelcome : true,

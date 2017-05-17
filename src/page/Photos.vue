@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="photos">
         <div class="page-header-main article">
             <ul>
                 <li v-for="item in content">
@@ -12,36 +12,17 @@
 
 <script>
     import { Indicator } from 'mint-ui';
-    function GetQueryString(name){
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
-    }
+    
     export default {
-        props: [],
+        props: ['content'],
         methods : {
         },
-        beforeCreate(){
-            this.content = [];
-        },
         activated(){
-            this.content = [];
              Indicator.open();
-        },
-        created(){
-            var that = this;
-            var url = that.url + 'p=' + GetQueryString('id');
-            that.$http.jsonp(url).then(function(response){
-                that.content = response.body.post.attachments;
-                Indicator.close();
-            },function(response){
-                console.log(response);
-            });
         },
         data () {
             return {
-                url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
-                content : []
+                url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&'
             }
         }
     }
