@@ -60,10 +60,8 @@
                     </a>
                 </div>
                 <img v-bind:src="downloadSingle" width="100%"/>
-            </div>
-                
+            </div>  
         </mt-popup>
-
     </div>
 </template>
 
