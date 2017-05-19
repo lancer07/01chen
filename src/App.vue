@@ -6,7 +6,7 @@
             <mt-tab-container v-model="selected">
                 <div class="page-header-main">
                     <mt-tab-container-item id="Monent">
-                        <photo-list v-on:showDetail="showDetail" />
+                        <photo-list />
                     </mt-tab-container-item>
                     <mt-tab-container-item id="About Me">
                         <about />
@@ -32,36 +32,6 @@
             </mt-tab-item>
         </mt-tabbar>
         
-        <div class="page-popup">
-            <mt-popup
-            v-model="popupDetail"
-            position="right"
-            closeOnClickModal="false">
-                <div class="page-wrap">
-                    <a @touchstart="closePopup" class="page-back">
-                        <img src="./assets/back.png" width="10" />
-                    </a>
-                    <div class="page-title">{{article.title}}</div>
-                    <div class="iframeWrap">
-                        <photos :content="article.content" v-on:showSinglePopup="showSinglePopup" v-on:closeSinglePopup="closeSinglePopup" />
-                    </div>
-                </div>
-            </mt-popup>
-        </div>
-
-        <mt-popup
-            v-model="popupSingle"
-            position="bottom"
-            v-bind:modal="noModel">
-            <div class="single-page">
-                <div class="page-close">
-                    <a @touchstart="closeSinglePopup" >
-                        <img src="./assets/close.png" width="40" />
-                    </a>
-                </div>
-                <img v-bind:src="downloadSingle" width="100%"/>
-            </div>  
-        </mt-popup>
     </div>
 </template>
 
@@ -71,43 +41,17 @@
     import Contact from './page/Contact';
     import Welcome from './page/Welcome';
     import PhotoList from './page/PhotoList';
-    import Photos from './page/Photos';
-
+   
     export default {
         name: 'app',
         components: {
             Welcome,
             About,
             Contact,
-            PhotoList,
-            Photos
+            PhotoList
         },
         methods: {
-            showDetail(id,title){
-                var that = this;
-                this.popupDetail = true;
-                this.article.title = title;
-                var url = that.url + 'p=' + id;
-                that.$http.jsonp(url).then(function(response){
-                    that.article.content = response.body.post.attachments;
-                    Indicator.close();
-                },function(response){
-                    console.log(response);
-                });
-            },
-            closePopup(){
-                this.article.title = '';
-                this.article.content = [];
-                this.popupDetail = false;
-            },
-            showSinglePopup(url){
-                this.popupSingle = true;
-                this.downloadSingle = url;
-            },
-            closeSinglePopup(){
-                this.popupSingle = false;
-                this.downloadSingle = '';
-            }
+            
         },
         created(){
             var that = this;
@@ -123,18 +67,9 @@
         data () {
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
-                //photosUrl : '',
                 selected : 'About Me',
                 time : 3,
-                showWelcome : true,
-                popupDetail : false,
-                article : {
-                    title : '',
-                    content : []
-                },
-                popupSingle : false,
-                noModel : false,
-                downloadSingle : ''
+                showWelcome : true
             }
         },
         watch : {
@@ -168,27 +103,6 @@
             -webkit-overflow-scrolling: touch; 
             overflow-y: scroll; 
             height: 100%;
-        }
-        .mint-popup{
-            width:100%;
-            height:100%;
-            background:#fff;
-            .page-back {
-                display: inline-block;
-                top: 0;
-                left: 0;
-                position: fixed;
-                width: 40px;
-                height: 50px;
-                line-height:50px;
-                text-align: center;
-                z-index:2000;
-                background:#fafafa;
-                img{
-                    vertical-align:middle;
-                }
-            }
-            
         }
     }
 </style>

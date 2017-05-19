@@ -1,49 +1,23 @@
 <template>
     <div id="photos">
         <div class="page-header-main article">
-            <div v-if="content.length">
-                <img v-lazy="content[0].url" @click="showSinglePopup(content[0].url)">
-            </div>
             <ul>
                 <li v-for="(item,index) in content">
-                    <img v-if="index > 0" v-lazy="item.url" @click="showSinglePopup(item.url)">
+                    <img v-lazy="item" @click="showSinglePopup(item)">
                 </li>
             </ul>
         </div>
-        <!--<mt-actionsheet
-            :actions="actions"
-            v-model="sheetVisible"
-            cancelText=""
-            closeOnClickModal="false">
-        </mt-actionsheet>-->
-        <mt-popup
-            v-model="popupVisible"
-            position="bottom"
-            v-bind:modal="noModel">
-            <div class="single-page">
-                <div class="page-close">
-                    <a @touchstart="closeSinglePopup" >
-                        <img src="../assets/close.png" width="40" />
-                    </a>
-                </div>
-                <img v-bind:src="download" width="100%"/>
-            </div>
-                
-        </mt-popup>
     </div>
 </template>
 
 <script>
-    import { Indicator  } from 'mint-ui';
-    
+    import { Indicator , Swipe, SwipeItem  } from 'mint-ui';
+
     export default {
         props: ['content'],
         methods : {
-            showSinglePopup(url){
-                this.$emit('showSinglePopup',url);
-            },
-            closeSinglePopup(){
-               this.$emit('closeSinglePopup');
+            showSinglePopup(item){
+                this.$emit('showSinglePopup',item);
             }
         },
         activated(){
@@ -53,20 +27,7 @@
             var that = this;
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
-                download : '',
-                popupVisible : false,
-                noModel : false,
-                actions : [{
-                    name : 'Save to Album',
-                    method : function(){
-                        document.querySelector('.v-modal').style.display='none';
-                    }},
-                    {
-                        name : 'Cancel',
-                        method : function(){
-                            document.querySelector('.v-modal').style.display='none'
-                        }}
-                    ]
+                
             }
         }
     }
@@ -88,14 +49,17 @@
         box-sizing: border-box;
     }
     .single-page{
-        background:#fff;
+        background:#343434;
+        position:absolute;
+        z-index:3000;
+        left:0;
+        top:0;
     }
     .page-close{
-       text-align:right;
        position:absolute;
        padding:0px;
        top:5px;
-       right:5px;
+       left:5px;
        a{
             display:block;
             border-radius:50%;
@@ -108,25 +72,34 @@
     .mint-popup{
         position:fixed
     }
+    #photos{
+        height:100%;
+    }
     .article{
+        height:100%;
+        text-align:center;
         ul{
             list-style:none;
             padding:0;
             margin:0;
             column-count : 2;
-            column-gap : 0px;
+            column-gap : 5px;
+            column-fill: balance;
             li{
                 padding:0;
                 margin:0px;
-                background:#f4f4f4;
+                -webkit-column-break-inside: avoid;
+                break-inside: avoid;
                 img{
                    vertical-align:middle;
+                   width:100%;
                 }
             }
         }
-        img{
-            width:100%;
-            height:auto;
+        .swipe-img{
+            margin:100px auto 0 auto;
+            max-width:100%;
+            max-height:500px;
         }
     }
 </style>
