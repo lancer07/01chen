@@ -68,7 +68,7 @@
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
                 selected : 'About Me',
-                time : 3,
+                time : 1,
                 showWelcome : true
             }
         },
@@ -98,6 +98,20 @@
             overflow: hidden;
             height: 100%;
             padding-bottom: 100px;
+        }
+        .page-title {
+            font-size: 20px;
+            text-align: center;
+            display: block;
+            line-height: 50px;
+            position:fixed;
+            width:100%;
+            height:50px;
+            left:0;
+            top:0;
+            z-index:100;
+            background:rgba(255,255,255,0.75);
+            box-sizing: border-box;
         }
         .iframeWrap{
             -webkit-overflow-scrolling: touch; 

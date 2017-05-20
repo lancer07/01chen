@@ -39,8 +39,7 @@
                 </div>
             </mt-popup>
         </div>
-        
-        <!--<swipe-photos :show="popupSingle"  :content="article.content" v-on:closeSinglePopup="closeSinglePopup"/>-->
+        <swipe-photos :show="popupSingle"  :defaultindex="singlePicIndex" :content="article.content" v-on:closeSinglePopup="closeSinglePopup"/>
     </div>
 </template>
 
@@ -116,11 +115,12 @@
                 this.article.content = '';
                 this.popupDetail = false;
             },
-            showSinglePopup(url){
+            showSinglePopup(index){
+                this.singlePicIndex = index;
                 this.popupSingle = true;
             },
             closeSinglePopup(){
-                alert(3443)
+                this.singlePicIndex = 0;
                 this.popupSingle = false;
             }
         },
@@ -141,6 +141,7 @@
                 max : 2,
                 popupDetail : false,
                 popupSingle : false,
+                singlePicIndex:0,
                 article : {
                     title : '',
                     content : ''
@@ -248,7 +249,7 @@
             line-height:50px;
             text-align: center;
             z-index:2000;
-            background:#fafafa;
+            background:rgba(255,255,255,0.9);
             img{
                 vertical-align:middle;
             }

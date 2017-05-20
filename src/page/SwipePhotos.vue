@@ -1,32 +1,30 @@
 <template>
-    <div id="swipePhotos">
-        <mt-popup
-            position="bottom"
-            v-model="show">
-            <div class="single-page">
-                <div class="page-close">
-                    <a @touchstart="closeSinglePopup" >
-                        <img src="../assets/close.png" width="40" />
-                    </a>
-                </div>
-                <mt-swipe :auto="0">
-                    <mt-swipe-item v-for="(item,index) in content">
-                        <img class="swipe-img" v-lazy="item">
-                    </mt-swipe-item>
-                </mt-swipe>
-            </div>  
-        </mt-popup>
-    </div>
+    <mt-popup
+        position="bottom"
+        v-model="show">
+        <div class="single-page" id="swipePhotos">
+            <div class="page-close">
+                <a @touchstart="closeSinglePopup" >
+                    <img src="../assets/close.png" width="40" />
+                </a>
+            </div>
+            <mt-swipe :auto="0" :defaultIndex="defaultindex">
+                <mt-swipe-item v-for="(item,index) in content">
+                    <img class="swipe-img" v-lazy="item">
+                </mt-swipe-item>
+            </mt-swipe>
+        </div>  
+    </mt-popup>
 </template>
 
 <script>
     import { Indicator , Swipe, SwipeItem  } from 'mint-ui';
 
     export default {
-        props: ['content','show'],
+        props: ['content','show','defaultindex'],
         methods : {
             closeSinglePopup(){
-                this.$emit('closeSinglePopup',item);
+                this.$emit('closeSinglePopup');
             }
         },
         activated(){
@@ -53,11 +51,20 @@
         height: 100%;
         top: 0;
         left: 0;
+        text-align:center;
         .mint-popup{
             background:inherit;
         }
         .single-page{
             height: 100%;
+        }
+        .swipe-img{
+            max-width: 100%;
+            max-height: 80vh;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
         }
     }
     .page-close{
@@ -69,15 +76,10 @@
        a{
             display:block;
             border-radius:50%;
-            background:rgba(255,255,255,0.9);
             img{
                 vertical-align:bottom;
             }
        }
     }
-    .swipe-img{
-        margin:100px auto 0 auto;
-        max-width:100%;
-        max-height:500px;
-    }
+    
 </style>
