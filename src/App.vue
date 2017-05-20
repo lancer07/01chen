@@ -68,7 +68,7 @@
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
                 selected : 'About Me',
-                time : 1,
+                time : 4,
                 showWelcome : true
             }
         },
