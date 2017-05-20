@@ -25,9 +25,11 @@
 
 <style lang="less" rel="stylesheet/less">
     .portrait{
-        padding:10px;
+        padding:60px 10px 10px 10px;
         height:200px;
+        margin-top:-50px;
         text-align:center;
+        background:#ffcdce;
         img{
             height:100%
         }
