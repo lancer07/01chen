@@ -3,12 +3,12 @@
         <div class="portrait">
             <img src="../assets/portrait.png" />
         </div>
-        <mt-cell title="Name" value="YiChen Lin"></mt-cell>
-        <mt-cell title="Gender" value="Female"></mt-cell>
-        <mt-cell title="Birth Day" value="18/07/2016"></mt-cell>
-        <mt-cell title="Blood Type" value="A"></mt-cell>
-        <mt-cell title="Constellation" value="Cancer"></mt-cell>
-        <mt-cell title="Ability" value="Sleep/Climb/Eat"></mt-cell>
+        <mt-cell title="名字" value="林艺宸"></mt-cell>
+        <mt-cell title="性别" value="女"></mt-cell>
+        <mt-cell title="生日" value="2016-07-18"></mt-cell>
+        <mt-cell title="血型" value="A"></mt-cell>
+        <mt-cell title="星座" value="巨蟹座"></mt-cell>
+        <mt-cell title="爱好" value="睡觉，吃，爬"></mt-cell>
     </div>
 </template>
 

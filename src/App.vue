@@ -2,16 +2,16 @@
     <div id="app" >
         <welcome v-bind:class="{hideWelcome:!showWelcome}" v-bind:time="time" />
         <div class="page-wrap">
-            <div class="page-title">{{selected}}</div>
+            <div class="page-title">{{pages[selected]}}</div>
             <mt-tab-container v-model="selected">
                 <div class="page-header-main">
                     <mt-tab-container-item id="Monent">
                         <photo-list />
                     </mt-tab-container-item>
-                    <mt-tab-container-item id="About Me">
+                    <mt-tab-container-item id="AboutMe">
                         <about />
                     </mt-tab-container-item>
-                    <mt-tab-container-item id="Contact Me">
+                    <mt-tab-container-item id="ContactMe">
                         <contact />
                     </mt-tab-container-item>
                 </div>
@@ -20,15 +20,15 @@
         <mt-tabbar v-model="selected" fixed>
             <mt-tab-item id="Monent">
                 <img slot="icon" src="./assets/camera.png">
-                Monent
+                相册
             </mt-tab-item>
-            <mt-tab-item id="About Me">
+            <mt-tab-item id="AboutMe">
                 <img slot="icon" src="./assets/me.png">
-                About Me
+                我的介绍
             </mt-tab-item>
-            <mt-tab-item id="Contact Me">
+            <mt-tab-item id="ContactMe">
                 <img slot="icon" src="./assets/phone.png">
-                Contact Me
+                联系我
             </mt-tab-item>
         </mt-tabbar>
         
@@ -67,9 +67,15 @@
         data () {
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/?json=1&',
-                selected : 'About Me',
+                selected : 'Monent',
                 time : 4,
-                showWelcome : true
+                showWelcome : true,
+                pages : {
+                    Monent : '相册',
+                    AboutMe: '我的介绍',
+                    ContactMe:'联系我'
+
+                }
             }
         },
         watch : {

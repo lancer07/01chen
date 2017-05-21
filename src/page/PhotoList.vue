@@ -12,7 +12,7 @@
                 <h2 class="tit"><span>{{item.title}}</span></h2>
                 <div class="pic">
                     <img v-lazy="item.thumbnail">
-                    <span class="total">{{item.total}} Photos</span>
+                    <span class="total">{{item.total}} 图</span>
                 </div>
                 <ul class="thumbnail" v-if="item.images.length > 3">
                      <li v-for="(pic,index) in item.images" v-if="index < 3">
