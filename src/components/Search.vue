@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <img src="../assets/search.png" width="24" @click="toggleSearch"/>
+    <img src="../assets/filter.png" width="22" @click="toggleSearch"/>
     
     <mt-popup
     v-model="popupSearch"
@@ -66,7 +66,7 @@ export default {
                 }
                 .mint-popup{
                     height:60px;
-                    top:70px;
+                    top:75px;
                     text-align:left;
                     .mint-radiolist-title{
                         display:none;

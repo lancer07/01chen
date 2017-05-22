@@ -1,5 +1,8 @@
 <template>
     <div ref="piclist" class="monent-wrap">
+        <div class="loading" v-show="list.length == 0">
+            <mt-spinner type="fading-circle" :size="60"></mt-spinner>
+        </div>
         <ul ref="photolist"
             v-infinite-scroll="loadMorePhoto"
             infinite-scroll-distance="90">
@@ -33,7 +36,7 @@
                 </div>
             </mt-popup>
         </div>
-        <swipe-photos :show="popupSingle"  :defaultindex="singlePicIndex" :content="article.content" v-on:closeSinglePopup="closeSinglePopup"/>
+        <swipe-photos :show="popupSingle" :defaultindex="singlePicIndex" :content="article.content" v-on:closeSinglePopup="closeSinglePopup"/>
     </div>
 </template>
 
@@ -120,7 +123,7 @@
             Indicator.open();
         },
         created(){
-           
+           Indicator.open();
         },
         data() {
             return {
@@ -164,6 +167,20 @@
         background:#f4f4f4;
         .mint-loadmore{
             overflow:auto;
+        }
+        .loading{
+            text-align:center;
+            background:#fff;
+            height:50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            >span{
+                margin:0 auto;
+                width:60px;
+                height:60px;
+                display:block;
+            }
         }
         ul{
             margin:0;
@@ -242,7 +259,7 @@
             line-height:50px;
             text-align: center;
             z-index:2000;
-            background:rgba(255,255,255,0.9);
+            background:inherit;
             img{
                 vertical-align:middle;
             }
