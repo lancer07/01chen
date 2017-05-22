@@ -200,7 +200,8 @@
                 border-bottom:1px solid #fafafa;
                 margin: 0 0 10px 0;
                 .video{
-                    height:300px;
+                    height:260px;
+                    width:100%;
                     overflow:hidden;
                     position:relative;
                     // display: flex; 
