@@ -1,10 +1,11 @@
 <template>
   <div class="search">
-    <img src="../assets/filter.png" width="22" @touchend="toggleSearch"/>
+    <img src="../assets/filter.png" width="22" @touchstart="toggleSearch"/>
     
     <mt-popup
     v-model="popupSearch"
-    position="middle">
+    position="middle"
+    closeOnClickModal="false">
         <mt-radio
         title=""
         v-model="searchKey"
@@ -33,7 +34,8 @@ export default {
   name: 'search',
   props: [],
   methods : {
-    toggleSearch(){
+    toggleSearch(e){
+        e.preventDefault();
         this.popupSearch = true;
     }
   },

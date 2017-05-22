@@ -189,7 +189,7 @@
             li{
                 
                 padding:5px 15px 15px 15px;
-                background:#fff;
+                background:#f9f9f9;
                 border-bottom:1px solid #fafafa;
                 margin: 0 0 10px 0;
                 .pic{
