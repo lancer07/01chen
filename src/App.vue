@@ -2,11 +2,14 @@
     <div id="app" >
         <welcome v-bind:class="{hideWelcome:!showWelcome}" v-bind:time="time" />
         <div class="page-wrap">
-            <div class="page-title">{{pages[selected]}}</div>
+            <div class="page-title">
+                {{pages[selected]}}
+                <search v-show="selected=='Monent'" v-on:filter="filter" />
+            </div>
             <mt-tab-container v-model="selected">
                 <div class="page-header-main">
                     <mt-tab-container-item id="Monent">
-                        <photo-list />
+                        <photo-list :filterCat="filterCat"/>
                     </mt-tab-container-item>
                     <mt-tab-container-item id="AboutMe">
                         <about />
@@ -41,17 +44,22 @@
     import Contact from './page/Contact';
     import Welcome from './page/Welcome';
     import PhotoList from './page/PhotoList';
-   
+    import Search from './components/Search';
+
+
     export default {
         name: 'app',
         components: {
             Welcome,
             About,
             Contact,
-            PhotoList
+            PhotoList,
+            Search
         },
         methods: {
-            
+            filter(cat){
+                this.filterCat = cat;
+            }
         },
         created(){
             var that = this;
@@ -62,7 +70,6 @@
                     clearInterval(welcome);
                 }
             },1000);
-            
         },
         data () {
             return {
@@ -74,8 +81,8 @@
                     Monent : '相册',
                     AboutMe: '我的介绍',
                     ContactMe:'联系我'
-
-                }
+                },
+                filterCat : '9'
             }
         },
         watch : {

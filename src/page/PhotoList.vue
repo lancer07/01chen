@@ -1,10 +1,5 @@
 <template>
     <div ref="piclist" class="monent-wrap">
-        <!--<mt-search 
-            v-model="searchKey"
-            cancel-text="cancel"
-            placeholder="search"
-        ></mt-search>-->
         <ul ref="photolist"
             v-infinite-scroll="loadMorePhoto"
             infinite-scroll-distance="90">
@@ -22,7 +17,6 @@
                 <div class="date">{{item.date}}</div>
             </li>
         </ul>
-
         <div class="page-popup">
             <mt-popup
             v-model="popupDetail"
@@ -50,7 +44,7 @@
     import SwipePhotos from './SwipePhotos';
 
     export default {
-        props: [],
+        props: ['filterCat'],
         components: {
             Photos,
             SwipePhotos
@@ -80,7 +74,7 @@
                 that.$http.jsonp(that.url,{
                     params: {
                         json : 1,
-                        cat : 9,
+                        cat : that.cat,
                         page : page,
                         s : that.searchKey == '' ? ' ' : that.searchKey
                     }
@@ -105,7 +99,7 @@
             loadMorePhoto() {
                 if(!this.findIn()){
                     if(this.nextPage <= this.max){
-                        this.renderList(this.nextPage);
+                        this.renderList(this.nextPage,);
                         pagesArea.push(this.nextPage);
                     }
                 }
@@ -128,14 +122,12 @@
             Indicator.open();
         },
         created(){
-            //this.page = 1;
-           // this.renderList(1);
+           
         },
         data() {
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/',
                 list : [],
-                searchKey : '',
                 bottomStatus: '',
                 nextPage : 1,
                 max : 2,
@@ -145,16 +137,18 @@
                 article : {
                     title : '',
                     content : ''
-                }
+                },
+                cat : 9
             }
         },
         watch : {
-            searchKey : function(newValue,oldValue){
-                this.nextPage = 1;
-                this.max = 1;
-                this.list = [];
-                pagesArea = [];
-                this.renderList(1);
+            filterCat(newCat,oldCat){
+                if(newCat != oldCat){
+                    this.list = [];
+                    this.nextPage = 1;
+                    this.cat = newCat
+                    this.renderList(1);
+                }
             }
         }
     }
