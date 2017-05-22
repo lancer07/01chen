@@ -8,9 +8,10 @@
             infinite-scroll-distance="90">
             <li v-for="(item,index) in list">
                 <h2 class="tit"><span>{{item.title}}</span></h2>
-
                 <!-- video -->
-                <div v-if="item.categories[1].id==17" class="video" v-html="item.content"></div>
+                <div v-if="item.categories[1].id==17" class="video" >
+                    <video v-bind:src="item.images[0]" autoplay="true"></video>
+                </div>
                 <!-- images -->
                 <div v-else @click="showImageDetail(index)">
                     <div class="pic">
@@ -66,6 +67,7 @@
                 that.article.content = detail.images;
                 Indicator.close();
             },
+            // 用来过滤出url链接
             buildData(data){
                 var urlReg = /src=['"]?([^"'\s]+)/g;
                 for(var i = 0 ;i < data.length;i++){
@@ -198,10 +200,13 @@
                 border-bottom:1px solid #fafafa;
                 margin: 0 0 10px 0;
                 .video{
-                    >div{
-                        width:100%!important
-                    }
+                    height:240px;
+                    overflow:hidden;
+                    position:relative;
                     video{
+                        top:50%;
+                        transform:translateY(-50%);
+                        position:absolute;
                         width:100%;
                         height:auto;
                     }
