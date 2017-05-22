@@ -191,7 +191,7 @@
                 padding:5px 15px 15px 15px;
                 background:#fff;
                 border-bottom:1px solid #fafafa;
-                margin: 10px 0;
+                margin: 0 0 10px 0;
                 .pic{
                     background:#f8f8f8;
                     position:relative;
