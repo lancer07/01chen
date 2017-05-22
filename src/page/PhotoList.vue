@@ -6,17 +6,23 @@
         <ul ref="photolist"
             v-infinite-scroll="loadMorePhoto"
             infinite-scroll-distance="90">
-            <li v-for="(item,index) in list" @click="showDetail(index)">
+            <li v-for="(item,index) in list">
                 <h2 class="tit"><span>{{item.title}}</span></h2>
-                <div class="pic">
-                    <img v-lazy="item.thumbnail">
-                    <span class="total">{{item.total}} 图</span>
+
+                <!-- video -->
+                <div v-if="item.categories[1].id==17" class="video" v-html="item.content"></div>
+                <!-- images -->
+                <div v-else @click="showImageDetail(index)">
+                    <div class="pic">
+                        <img v-lazy="item.thumbnail">
+                        <span class="total">{{item.total}} 图</span>
+                    </div>
+                    <ul class="thumbnail" v-if="item.images.length > 3">
+                        <li v-for="(pic,index) in item.images" v-if="index < 3">
+                            <img v-lazy="pic">
+                        </li>
+                    </ul>
                 </div>
-                <ul class="thumbnail" v-if="item.images.length > 3">
-                     <li v-for="(pic,index) in item.images" v-if="index < 3">
-                        <img v-lazy="pic">
-                     </li>
-                </ul>
                 <div class="date">{{item.date}}</div>
             </li>
         </ul>
@@ -52,7 +58,7 @@
             SwipePhotos
         },
         methods : {
-            showDetail(index){
+            showImageDetail(index){
                 var that = this;
                 var detail = this.list[index];
                 this.popupDetail = true;
@@ -187,11 +193,19 @@
             list-style:none;
             padding: 0;
             li{
-                
                 padding:5px 15px 15px 15px;
                 background:#f9f9f9;
                 border-bottom:1px solid #fafafa;
                 margin: 0 0 10px 0;
+                .video{
+                    >div{
+                        width:100%!important
+                    }
+                    video{
+                        width:100%;
+                        height:auto;
+                    }
+                }
                 .pic{
                     background:#f8f8f8;
                     position:relative;

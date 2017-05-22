@@ -20,6 +20,10 @@
         {
             label: '生活照',
             value: '15'
+        },
+        {
+            label: '视频',
+            value: '17'
         }]">
         </mt-radio>
     </mt-popup>
