@@ -10,7 +10,7 @@
                 <h2 class="tit"><span>{{item.title}}</span></h2>
                 <!-- video -->
                 <div v-if="item.categories[1].id==17" class="video" >
-                    <video v-bind:src="item.images[0]" autoplay="true"></video>
+                    <video v-bind:src="item.images[0]" autoplay="true" controls="controls"></video>
                 </div>
                 <!-- images -->
                 <div v-else @click="showImageDetail(index)">
@@ -202,11 +202,10 @@
                 .video{
                     height:240px;
                     overflow:hidden;
-                    position:relative;
+                    display: flex; 
+                    justify-content: center; 
+                    flex-direction: column;
                     video{
-                        top:50%;
-                        transform:translateY(-50%);
-                        position:absolute;
                         width:100%;
                         height:auto;
                     }
