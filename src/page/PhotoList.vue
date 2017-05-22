@@ -10,7 +10,7 @@
                 <h2 class="tit"><span>{{item.title}}</span></h2>
                 <!-- video -->
                 <div v-if="item.categories[1].id==17" class="video" >
-                    <video v-bind:src="item.images[0]" autoplay="true" controls="controls"></video>
+                    <video v-bind:src="item.images[0]" controls="controls" v-bind:poster="item.thumbnail"></video>
                 </div>
                 <!-- images -->
                 <div v-else @click="showImageDetail(index)">
@@ -200,14 +200,19 @@
                 border-bottom:1px solid #fafafa;
                 margin: 0 0 10px 0;
                 .video{
-                    height:240px;
+                    height:300px;
                     overflow:hidden;
-                    display: flex; 
-                    justify-content: center; 
-                    flex-direction: column;
+                    position:relative;
+                    // display: flex; 
+                    // justify-content: center; 
+                    // flex-direction: column;
                     video{
+                        // top:50%;
+                        // transform:translateY(-50%);
+                        // position:absolute;
                         width:100%;
-                        height:auto;
+                        height:100%;
+                        vertical-align:middle;
                     }
                 }
                 .pic{
