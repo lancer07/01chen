@@ -38,7 +38,6 @@
 </template>
 
 <script>
-    var pagesArea=[];
     import { Indicator, InfiniteScroll } from 'mint-ui';
     import Photos from './Photos';
     import SwipePhotos from './SwipePhotos';
@@ -75,8 +74,7 @@
                     params: {
                         json : 1,
                         cat : that.cat,
-                        page : page,
-                        s : that.searchKey == '' ? ' ' : that.searchKey
+                        page : page
                     }
                 }).then(function(response){
                     var newList = this.buildData(response.body.posts);
@@ -89,8 +87,8 @@
                 });
             },
             findIn(){
-                for(var i=0;i<pagesArea.length;i++){
-                    if(this.nextPage == pagesArea[i]){
+                for(var i=0;i<this.pagesArea.length;i++){
+                    if(this.nextPage == this.pagesArea[i]){
                         return true
                     }
                 }
@@ -100,7 +98,7 @@
                 if(!this.findIn()){
                     if(this.nextPage <= this.max){
                         this.renderList(this.nextPage,);
-                        pagesArea.push(this.nextPage);
+                        this.pagesArea.push(this.nextPage);
                     }
                 }
             },
@@ -128,7 +126,6 @@
             return {
                 url : 'http://w848658.s234.ufhosted.com/linqing07/',
                 list : [],
-                bottomStatus: '',
                 nextPage : 1,
                 max : 2,
                 popupDetail : false,
@@ -138,7 +135,8 @@
                     title : '',
                     content : ''
                 },
-                cat : 9
+                cat : 9,
+                pagesArea : []
             }
         },
         watch : {
@@ -146,7 +144,8 @@
                 if(newCat != oldCat){
                     this.list = [];
                     this.nextPage = 1;
-                    this.cat = newCat
+                    this.cat = newCat;
+                    this.pagesArea=[];
                     this.renderList(1);
                 }
             }
