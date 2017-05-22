@@ -230,10 +230,13 @@
                         margin:0;
                         height: 70px;
                         overflow:hidden;
+                        position:relative;
                         img{
                             width:100%;
                             height:auto;
-                            vertical-align:middle;
+                            top: 50%;
+                            position:absolute;
+                            transform: translateY(-50%);
                         }
                     }
                 }
