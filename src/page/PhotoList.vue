@@ -24,7 +24,14 @@
                         </li>
                     </ul>
                 </div>
-                <div class="date">{{item.date}}</div>
+                <div class="bar">
+                    <div class="date">{{item.date}}</div>
+                    <div class="like" v-on:touchstart.once="like(item.id,index)">
+                        <span v-text="item.likes"></span>
+                        <img src="../assets/like.png" width="23"/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
             </li>
         </ul>
         <div class="page-popup">
@@ -48,7 +55,7 @@
 </template>
 
 <script>
-    import { Indicator, InfiniteScroll } from 'mint-ui';
+    import { Indicator, InfiniteScroll,Toast } from 'mint-ui';
     import Photos from './Photos';
     import SwipePhotos from './SwipePhotos';
 
@@ -76,6 +83,7 @@
                         data[i].images.push(RegExp.$1);
                     }
                     data[i].total = data[i].images.length;
+                    data[i].likes = data[i].custom_fields.bigfa_ding ? data[i].custom_fields.bigfa_ding[0] : 0;
                 }
                 return data;
             },
@@ -125,6 +133,25 @@
             closeSinglePopup(){
                 this.singlePicIndex = 0;
                 this.popupSingle = false;
+            },
+            like(id,index){
+                var that =this; 
+                this.$http.get(that.url + 'wp-admin/admin-ajax.php', {
+                    params: {
+                        action: "bigfa_like",
+                        um_id: id,
+                        um_action: 'ding'
+                    }
+                }).then(function(response){
+                    that.list[index].likes = response.body;
+                    Toast({
+                    message: '赞 +1',
+                        position: 'middle',
+                        duration: 1000
+                    });
+                }, function(response){
+                    console.log(response);
+                });
             }
         },
         activated(){
@@ -195,7 +222,7 @@
             list-style:none;
             padding: 0;
             li{
-                padding:5px 15px 15px 15px;
+                padding:5px 15px;
                 background:#f9f9f9;
                 border-bottom:1px solid #fafafa;
                 margin: 0 0 10px 0;
@@ -264,10 +291,23 @@
                         }
                     }
                 }
-                .date{
-                    font-size:12px;
+                .bar{
+                    text-align:right;
+                    line-height:35px;
                     color:#959595;
-                    line-height:2;
+                    img{
+                        vertical-align:sub;
+                    }
+                    .date{
+                        font-size:12px;
+                        float:left;
+                    } 
+                    .like{
+                        float:right;
+                    }
+                    .clearfix{
+                        clear:both;
+                    }
                 }
             }
         }
