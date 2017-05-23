@@ -27,8 +27,8 @@
                 <div class="bar">
                     <div class="date">{{item.date}}</div>
                     <div class="like" v-on:touchstart.once="like(item.id,index)">
-                        <span v-text="item.likes"></span>
                         <img src="../assets/like.png" width="23"/>
+                        <span>赞 +{{item.likes}}</span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -227,7 +227,7 @@
                 border-bottom:1px solid #fafafa;
                 margin: 0 0 10px 0;
                 .video{
-                    height:260px;
+                    height:300px;
                     width:100%;
                     overflow:hidden;
                     position:relative;
