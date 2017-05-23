@@ -27,7 +27,8 @@
                 <div class="bar">
                     <div class="date">{{item.date}}</div>
                     <div class="like" v-on:touchstart.once="like(item.id,index)">
-                        <img src="../assets/like.png" width="23"/>
+                        <img v-if="item.liked == 0" src="../assets/like.png" width="23" />
+                        <img v-else src="../assets/liked.png" width="23" />
                         <span>赞 +{{item.likes}}</span>
                     </div>
                     <div class="clearfix"></div>
@@ -84,6 +85,7 @@
                     }
                     data[i].total = data[i].images.length;
                     data[i].likes = data[i].custom_fields.bigfa_ding ? data[i].custom_fields.bigfa_ding[0] : 0;
+                    data[i].liked = 0;
                 }
                 return data;
             },
@@ -136,6 +138,12 @@
             },
             like(id,index){
                 var that =this; 
+                Toast({
+                    message: '赞 +1',
+                    position: 'middle',
+                    duration: 1000
+                });
+                that.list[index].liked = 1;
                 this.$http.get(that.url + 'wp-admin/admin-ajax.php', {
                     params: {
                         action: "bigfa_like",
@@ -143,12 +151,7 @@
                         um_action: 'ding'
                     }
                 }).then(function(response){
-                    that.list[index].likes = response.body;
-                    Toast({
-                    message: '赞 +1',
-                        position: 'middle',
-                        duration: 1000
-                    });
+                    that.list[index].likes = response.body; 
                 }, function(response){
                     console.log(response);
                 });
