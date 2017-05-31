@@ -5,14 +5,14 @@
         </div>
         <ul ref="photolist"
             v-infinite-scroll="loadMorePhoto"
-            infinite-scroll-distance="90">
+            infinite-scroll-distance="20">
             <li v-for="(item,index) in list">
                 <h2 class="tit"><span>{{item.title}}</span></h2>
-                <!-- video -->
+                <!-- if video -->
                 <div v-if="item.categories[1].id==17" class="video" >
                     <video v-bind:src="item.images[0]" controls="controls" v-bind:poster="item.thumbnail"></video>
                 </div>
-                <!-- images -->
+                <!-- if image -->
                 <div v-else @click="showImageDetail(index)">
                     <div class="pic">
                         <img v-lazy="item.thumbnail">
@@ -75,7 +75,7 @@
                 that.article.content = detail.images;
                 Indicator.close();
             },
-            // 用来过滤出url链接
+            // 用来过滤出content字段里的url链接
             buildData(data){
                 var urlReg = /src=['"]?([^"'\s]+)/g;
                 for(var i = 0 ;i < data.length;i++){
