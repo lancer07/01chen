@@ -46,12 +46,12 @@
                     </a>
                     <div class="page-title">{{article.title}}</div>
                     <div class="iframeWrap">
-                        <photos :content="article.content" v-on:showSinglePopup="showSinglePopup"/>
+                        <photos :content="article.content"/>
                     </div>
                 </div>
             </mt-popup>
         </div>
-        <swipe-photos :show="popupSingle" :defaultindex="singlePicIndex" :content="article.content" v-on:closeSinglePopup="closeSinglePopup"/>
+        <swipe-photos :show="popupSingle" :defaultindex="singlePicIndex" :content="article.content"/>
     </div>
 </template>
 
@@ -128,14 +128,6 @@
                 this.article.content = '';
                 this.popupDetail = false;
             },
-            showSinglePopup(index){
-                this.singlePicIndex = index;
-                this.popupSingle = true;
-            },
-            closeSinglePopup(){
-                this.singlePicIndex = 0;
-                this.popupSingle = false;
-            },
             like(id,index){
                 var that =this; 
                 Toast({
@@ -161,7 +153,25 @@
             Indicator.open();
         },
         created(){
-           Indicator.open();
+            Indicator.open();
+            var that = this;
+            bus.$on('filter', function (newCat) {
+                that.list = [];
+                that.nextPage = 1;
+                that.cat = newCat;
+                that.pagesArea=[];
+                that.renderList(1);
+            });
+
+            bus.$on('closeSinglePopup',function(){
+                that.singlePicIndex = 0;
+                that.popupSingle = false;
+            });
+
+            bus.$on('showSinglePopup',function(index){
+                that.singlePicIndex = index;
+                that.popupSingle = true;
+            });
         },
         data() {
             return {
@@ -178,17 +188,6 @@
                 },
                 cat : 9,
                 pagesArea : []
-            }
-        },
-        watch : {
-            filterCat(newCat,oldCat){
-                if(newCat != oldCat){
-                    this.list = [];
-                    this.nextPage = 1;
-                    this.cat = newCat;
-                    this.pagesArea=[];
-                    this.renderList(1);
-                }
             }
         }
     }

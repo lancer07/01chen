@@ -4,7 +4,7 @@
         <div class="page-wrap">
             <div class="page-title">
                 {{pages[selected]}}
-                <search v-show="selected=='Monent'" v-on:filter="filter" />
+                <search v-show="selected=='Monent'"  />
             </div>
             <mt-tab-container v-model="selected">
                 <div class="page-header-main">
@@ -45,8 +45,6 @@
     import Welcome from './page/Welcome';
     import PhotoList from './page/PhotoList';
     import Search from './components/Search';
-
-
     export default {
         name: 'app',
         components: {
@@ -57,9 +55,9 @@
             Search
         },
         methods: {
-            filter(cat){
-                this.filterCat = cat;
-            }
+            // filter(cat){
+            //     this.filterCat = cat;
+            // }
         },
         created(){
             var that = this;

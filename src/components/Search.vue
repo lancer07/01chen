@@ -48,11 +48,12 @@ export default {
             popupSearch: false,
             searchKey : '9'
         }
-},
-  watch : {
+    },
+    watch : {
         searchKey : function(newValue,oldValue){
             this.popupSearch = false;
-            this.$emit('filter',newValue);
+            bus.$emit('filter', newValue);
+            //this.$emit('filter',newValue);
         }
     }
 }

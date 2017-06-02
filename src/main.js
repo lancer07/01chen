@@ -10,37 +10,9 @@ Vue.use(VueResource);
 import App from './App'
 import Photos from './page/Photos'
 /* eslint-disable no-new */
+window.bus = new Vue();
 const HomePage = new Vue({
   el: '#app',
   template: '<App />',
   components: { App },
 })
-
-// const NotFound = { template: '<p>Page not found</p>' }
-// const Home = { 
-//     template: '<app />',
-//     components: { App } 
-// }
-
-// const PhotosPage = { 
-//     template: '<photos />',
-//     components: { Photos } 
-// }
-
-// const routes = {
-//   '/home': Home,
-//   '/photos' : PhotosPage
-// }
-
-// new Vue({
-//   el: '#app',
-//   data: {
-//     currentRoute: window.location.pathname
-//   },
-//   computed: {
-//     ViewComponent () {
-//       return routes[this.currentRoute] || Home
-//     }
-//   },
-//   render (h) { return h(this.ViewComponent) }
-// })

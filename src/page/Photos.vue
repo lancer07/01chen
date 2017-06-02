@@ -17,7 +17,7 @@
         props: ['content'],
         methods : {
             showSinglePopup(index){
-                this.$emit('showSinglePopup',index);
+                bus.$emit('showSinglePopup',index);
             }
         },
         activated(){

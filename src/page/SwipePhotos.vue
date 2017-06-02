@@ -24,7 +24,7 @@
         props: ['content','show','defaultindex'],
         methods : {
             closeSinglePopup(){
-                this.$emit('closeSinglePopup');
+                bus.$emit('closeSinglePopup');
             }
         },
         activated(){
